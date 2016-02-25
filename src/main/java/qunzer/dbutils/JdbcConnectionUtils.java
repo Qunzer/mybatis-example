@@ -19,16 +19,11 @@ public class JdbcConnectionUtils {
     }
 
     public Connection getConnection() throws Exception {
-        System.out.println(genericObjectPool.getCreatedCount());
-        Connection connection = genericObjectPool.borrowObject();
-        System.out.println(genericObjectPool.getCreatedCount());
-        return connection;
+        return genericObjectPool.borrowObject();
 
     }
 
     public void closeConnection(Connection connection) {
-        System.out.println("before close :active num:" + genericObjectPool.getNumActive());
         genericObjectPool.returnObject(connection);
-        System.out.println("after close :active num:" + genericObjectPool.getNumActive());
     }
 }
